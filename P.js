@@ -27,6 +27,8 @@
 			});
 
 			$links.value = r.join("\n");
+			$links.focus();
+			$links.select();
 		});
 
 		return false;
@@ -43,7 +45,7 @@
 			// ignore non-links
 			P.log('checking link', v);
 
-			if (v.indexOf('http') === 0 || v.indexOf('//') === 0) {
+			if (v.indexOf('http') === 0 || v.indexOf('//') !== -1) {
 				T.create({ url: v }, function () { P.log.apply(console, arguments); });
 			}
 		});
@@ -60,7 +62,11 @@
 	};
 
 	P.load = function () {
-		if (!localStorage['multitabio']) return;
+
+		if (!localStorage['multitabio']) {
+			$links.focus();
+			return;
+		}
 
 		options = JSON.parse(localStorage['multitabio']);
 		
@@ -83,6 +89,8 @@
 		}
 
 		P.log('loaded multitabio options');
+
+		P.get();
 	}
 
 	document.addEventListener('DOMContentLoaded', P.load);
