@@ -1,17 +1,17 @@
 {
-  "manifest_version": 2,
-  "name": "Tab-Snap",
-  "version": "1.2.3",
-  "description": "Get open tab URLs for window, or load a list of URLs into new tabs on this window.",
-  "icons": {
-    "128": "icon128.png",
-    "48":  "icon48.png"
-    },
-  "browser_action": {
-    "default_icon": "icon128.png",	
-    "default_title": "Tab-Snap",
-    "default_popup": "popup.html"
-   },
- "options_page": "options.html",
- "permissions": [ "tabs",  "clipboardWrite", "clipboardRead"]
+	"manifest_version": 2,
+	"name": "Multitab I/O",
+	"version": "0.1.0",
+	"description": "Export a list of URLs from open tabs, or bulk-open a list of pasted URLs.",
+	"icons": {
+		"128": "icon128.png",
+		"48":  "icon48.png"
+	},
+	"browser_action": {
+		"default_icon": "icon128.png",
+		"default_title": "Multitab I/O",
+		"default_popup": "popup.html"
+	},
+	"options_page": "options.html",
+	"permissions": [ "tabs" ]
 }
