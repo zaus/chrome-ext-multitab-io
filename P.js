@@ -2,11 +2,13 @@
 	var P = {};
 
 	P.log = function () {
+		if (!options.debugMode || !options.debugMode.val) return;
+
 		var args = Array.prototype.slice.call(arguments, 0);
 		console.log.apply(console, args);
 
 		var $d = $('#debug')[0];
-		if (options.debugMode.val && $d) {
+		if ($d) {
 			args = args.map(function (o) { return JSON.stringify(o); });
 			$d.innerHTML += args.join("\n");
 		}
@@ -63,9 +65,10 @@
 
 	P.load = function () {
 
+		// default options
 		if (!localStorage['multitabio']) {
-			$links.focus();
-			return;
+			if($links) $links.focus();
+			localStorage['multitabio'] = JSON.stringify({ ignoreChrome: { type: "checkbox", val: true }, includeTitle: { type: "checkbox", val: true }, debugMode: { type: "checkbox", val: false } });
 		}
 
 		options = JSON.parse(localStorage['multitabio']);
