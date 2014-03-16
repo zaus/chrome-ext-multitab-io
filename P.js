@@ -1,5 +1,5 @@
 ﻿(function (T, $) {
-	var P = {};
+	var P = {}, N = 'multitabio';
 
 	P.log = function () {
 		if (!options.debugMode || !options.debugMode.val) return;
@@ -23,8 +23,16 @@
 			ts.forEach(function (t, i) {
 				// ignore chromespecials?
 				if (!options.ignoreChrome.val || t.url.indexOf('chrome') !== 0) {
-					if (options.includeTitle.val) r.push(t.title);
-					r.push(options.includeTitle.val ? "\t" + t.url : t.url);
+					if(options.markdown.val) {
+						r.push("* [" + t.title + "](" + t.url + ")");
+					}
+					if(options.wiki.val) {
+						r.push("* [" + t.title + "|" + t.url + "]");
+					}
+					else {
+						if (options.includeTitle.val) r.push("* " + t.title);
+						r.push((options.includeTitle.val ? "\t" + t.url : "* " + t.url)+"\n");
+					}
 				}
 			});
 
@@ -59,19 +67,19 @@
 			o[v.id] = { val: v.checked, type: v.type };
 			return o;
 		}, {});
-		P.log('saved multitabio options', options);
-		localStorage['multitabio'] = JSON.stringify(options);
+		P.log('saved ' + N + ' options', options);
+		localStorage[N] = JSON.stringify(options);
 	};
 
 	P.load = function () {
 
 		// default options
-		if (!localStorage['multitabio']) {
+		if (!localStorage[N]) {
 			if($links) $links.focus();
-			localStorage['multitabio'] = JSON.stringify({ ignoreChrome: { type: "checkbox", val: true }, includeTitle: { type: "checkbox", val: true }, debugMode: { type: "checkbox", val: false } });
+			localStorage[N] = JSON.stringify({ ignoreChrome: { type: "checkbox", val: true }, includeTitle: { type: "checkbox", val: true }, debugMode: { type: "checkbox", val: false } });
 		}
 
-		options = JSON.parse(localStorage['multitabio']);
+		options = JSON.parse(localStorage[N]);
 		
 		for (var k in options) {
 			if (options.hasOwnProperty(k)) {
@@ -79,7 +87,7 @@
 
 				var $o = $('#' + k)[0];
 				if ($o) {
-					if (v.type == 'checkbox') $o.checked = v.val;
+					if (v.type == 'checkbox' || v.type == 'radio') $o.checked = v.val;
 					else $o.value = v.val;
 				}
 			}
@@ -91,7 +99,7 @@
 			$('#P')[0].parentNode.appendChild(e);
 		}
 
-		P.log('loaded multitabio options');
+		P.log('loaded ' + N + ' options');
 
 		P.get();
 	}

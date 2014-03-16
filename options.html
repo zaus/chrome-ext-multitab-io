@@ -4,8 +4,24 @@
 	<div class="f">
 		<label>Ignore Chrome Urls?<input type="checkbox" id="ignoreChrome" /></label>
 	</div>
-	<div class="f">
-		<label>Include title when copying?<input type="checkbox" id="includeTitle" /></label>
+	<div class="fs">
+		<fieldset>
+			<label>Format</label>
+			
+			<div class="f">
+				<label>Link Only<input type="radio" name="format" id="linkonly" /></label>	
+			</div>
+			<div class="f">
+				<label>Plain Text<input type="radio" name="format" id="includeTitle" /></label>	
+			</div>
+			<div class="f">
+				<label>Markdown<input type="radio" name="format" id="markdown" /></label>	
+			</div>
+			<div class="f">
+				<label>Wiki<input type="radio" name="format" id="wiki" /></label>	
+			</div>
+		</fieldset>
+		<em>(all but first automatically includes title)</em>
 	</div>
 	<div class="f">
 		<label>Debug Mode<input type="checkbox" id="debugMode" /></label>
