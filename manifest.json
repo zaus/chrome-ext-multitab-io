@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Multitab I/O",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "Export a list of URLs from open tabs, or bulk-open a list of pasted URLs.",
 	"icons": {
 		"128": "icon96.png",

@@ -1,0 +1,2 @@
+MultitabIO.initPopup();
+	

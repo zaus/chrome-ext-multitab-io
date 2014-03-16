@@ -1,4 +1,4 @@
-﻿(function (T, $) {
+;MultitabIO = (function (T, $) {
 	var P = {}, N = 'multitabio';
 
 	P.log = function () {
@@ -26,7 +26,7 @@
 					if(options.markdown.val) {
 						r.push("* [" + t.title + "](" + t.url + ")");
 					}
-					if(options.wiki.val) {
+					else if(options.wiki.val) {
 						r.push("* [" + t.title + "|" + t.url + "]");
 					}
 					else {
@@ -102,12 +102,16 @@
 		P.log('loaded ' + N + ' options');
 
 		P.get();
-	}
+	};
 
-	document.addEventListener('DOMContentLoaded', P.load);
 	['get', 'set', 'clear', 'save'].forEach(function (a) {
 		var $o = $('#' + a)[0];
 		if($o) $o.addEventListener('click', P[a]);
 	});
 
+	
+	
+	return {
+		initPopup: function() { document.addEventListener('DOMContentLoaded', P.load); }
+	};
 })(chrome.tabs, function (s) { return document.querySelectorAll(s); });
