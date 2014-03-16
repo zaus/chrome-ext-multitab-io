@@ -104,14 +104,16 @@
 		P.get();
 	};
 
-	['get', 'set', 'clear', 'save'].forEach(function (a) {
-		var $o = $('#' + a)[0];
-		if($o) $o.addEventListener('click', P[a]);
-	});
-
 	
 	
 	return {
-		initPopup: function() { document.addEventListener('DOMContentLoaded', P.load); }
+		initLoad: function() { document.addEventListener('DOMContentLoaded', P.load); }
+		, initOptions: function() {
+			['get', 'set', 'clear', 'save'].forEach(function (a) {
+				var $o = $('#' + a)[0];
+				if($o) $o.addEventListener('click', P[a]);
+			});
+
+		}
 	};
 })(chrome.tabs, function (s) { return document.querySelectorAll(s); });

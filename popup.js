@@ -1,2 +1,2 @@
-MultitabIO.initPopup();
+MultitabIO.initLoad();
 	
