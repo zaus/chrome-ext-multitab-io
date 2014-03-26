@@ -1,2 +1,0 @@
-MultitabIO.initLoad();
-MultitabIO.initOptions();

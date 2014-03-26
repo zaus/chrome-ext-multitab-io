@@ -1,2 +1,2 @@
 MultitabIO.initLoad();
-	
+MultitabIO.initActions();

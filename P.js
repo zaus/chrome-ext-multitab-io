@@ -108,7 +108,7 @@
 	
 	return {
 		initLoad: function() { document.addEventListener('DOMContentLoaded', P.load); }
-		, initOptions: function() {
+		, initActions: function() {
 			['get', 'set', 'clear', 'save'].forEach(function (a) {
 				var $o = $('#' + a)[0];
 				if($o) $o.addEventListener('click', P[a]);
