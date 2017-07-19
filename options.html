@@ -2,29 +2,37 @@
 
 <div class="c">
 	<div class="f">
-		<label>Ignore Chrome Urls?<input type="checkbox" id="ignoreChrome" /></label>
+		<label title="Don't include Chrome tabs like 'Settings', etc in the list">Ignore Chrome Urls?<input type="checkbox" id="ignoreChrome" /></label>
+	</div>
+	<div class="f">
+		<label title="Show debugging output in the extension popup">Debug Mode<input type="checkbox" id="debugMode" /></label>
 	</div>
 	<div class="fs">
 		<fieldset>
 			<legend>Format</legend>
+			<em>(All but first automatically includes title)</em>
 			
 			<div class="f">
-				<label>Link Only<input type="radio" name="format" id="linkonly" /></label>	
+				<label title="Just the url, please">Link Only<input type="radio" name="format" id="linkonly" /></label>	
 			</div>
 			<div class="f">
-				<label>Plain Text<input type="radio" name="format" id="includeTitle" /></label>	
+				<label title="Make a pseudo-bulleted list with the title on one line and the url indented afterwards">Plain Text<input type="radio" name="format" id="plaintext" /></label>	
 			</div>
 			<div class="f">
-				<label>Markdown<input type="radio" name="format" id="markdown" /></label>	
+				<label title="Make a pseudo-bulleted list with the title on one line and the url indented afterwards, with another empty line between bullets">Padded Plain Text<input type="radio" name="format" id="includeTitle" /></label>	
 			</div>
 			<div class="f">
-				<label>Wiki<input type="radio" name="format" id="wiki" /></label>	
+				<label title="Ready for Github, etc">Markdown<input type="radio" name="format" id="markdown" /></label>	
+			</div>
+			<div class="f">
+				<label title="Ready for Atlassian products">Wiki/Jira<input type="radio" name="format" id="wiki" /></label>	
+			</div>
+			<div class="f">
+				<label title="Choose your own adventure">Custom<input type="radio" name="format" id="custom" /></label>
+				<textarea id="txtCustom" rows="3"></textarea>
+				<p>Format with placeholders: <code>blah blah {title} = foo bar {url}</code></p>
 			</div>
 		</fieldset>
-		<em>(all but first automatically includes title)</em>
-	</div>
-	<div class="f">
-		<label>Debug Mode<input type="checkbox" id="debugMode" /></label>
 	</div>
 </div>
 <div class="c">

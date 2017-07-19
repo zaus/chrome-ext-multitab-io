@@ -3,3 +3,9 @@
 #links { width:100%; height:10em; }
 .c button { min-width:20%; min-height:2em; display:inline-block; margin:1em; }
 a { text-decoration: none; }
+fieldset { border: none; padding:0; margin:1em 0; }
+legend { font-weight: bolder; }
+.f { padding:0.25em; }
+div.f:nth-child(even) {
+   background-color: #efefef;
+}

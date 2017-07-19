@@ -17,22 +17,34 @@
 	var options = {}
 		, $links = $('#links')[0]
 
+	function isCheckable(v) {
+		return v.type == 'checkbox' || v.type == 'radio';
+	}
+
 	P.get = function () {
 		T.query({ currentWindow: true }, function (ts) {
 			var r = [];
 			ts.forEach(function (t, i) {
-				// ignore chromespecials?
-				if (!options.ignoreChrome.val || t.url.indexOf('chrome') !== 0) {
-					if(options.markdown.val) {
-						r.push("* [" + t.title + "](" + t.url + ")");
-					}
-					else if(options.wiki.val) {
-						r.push("* [" + t.title + "|" + t.url + "]");
-					}
-					else {
-						if (options.includeTitle.val) r.push("* " + t.title);
-						r.push((options.includeTitle.val ? "\t" + t.url : "* " + t.url)+"\n");
-					}
+				// skip chromespecials
+				if (options.ignoreChrome.val && t.url.indexOf('chrome') === 0) return;
+				
+				if(options.markdown.val) {
+					r.push("* [" + t.title + "](" + t.url + ")");
+				}
+				else if(options.wiki.val) {
+					r.push("* [" + t.title + "|" + t.url + "]");
+				}
+				else if(options.includeTitle.val) {
+					r.push("* " + t.title + "\n\t" + t.url + "\n");
+				}
+				else if(options.plaintext.val) {
+					r.push("* " + t.title + "\n\t" + t.url);
+				}
+				else if(options.custom.val) {
+					r.push(options.txtCustom.val.replace(/\{title\}/g, t.title).replace(/\{url\}/g, t.url));
+				}
+				else {
+					r.push("* " + t.url);
 				}
 			});
 
@@ -61,10 +73,9 @@
 		});
 	};
 
-
 	P.save = function () {
-		options = [].reduce.call($('.f input'), function (o, v) {
-			o[v.id] = { val: v.checked, type: v.type };
+		options = [].reduce.call($('.f input, .f textarea'), function (o, v) {
+			o[v.id] = { val: isCheckable(v) ? v.checked : v.value, type: v.type };
 			return o;
 		}, {});
 		P.log('saved ' + N + ' options', options);
@@ -87,7 +98,7 @@
 
 				var $o = $('#' + k)[0];
 				if ($o) {
-					if (v.type == 'checkbox' || v.type == 'radio') $o.checked = v.val;
+					if (isCheckable(v)) $o.checked = v.val;
 					else $o.value = v.val;
 				}
 			}
