@@ -20,6 +20,9 @@
 	function isCheckable(v) {
 		return v.type == 'checkbox' || v.type == 'radio';
 	}
+	function isChecked(k) {
+		return options[k] && options[k].val;
+	}
 
 	P.get = function () {
 		T.query({ currentWindow: true }, function (ts) {
@@ -28,19 +31,19 @@
 				// skip chromespecials
 				if (options.ignoreChrome.val && t.url.indexOf('chrome') === 0) return;
 				
-				if(options.markdown.val) {
+				if(isChecked('markdown')) {
 					r.push("* [" + t.title + "](" + t.url + ")");
 				}
-				else if(options.wiki.val) {
+				else if(isChecked('wiki')) {
 					r.push("* [" + t.title + "|" + t.url + "]");
 				}
-				else if(options.includeTitle.val) {
+				else if(isChecked('includeTitle')) {
 					r.push("* " + t.title + "\n\t" + t.url + "\n");
 				}
-				else if(options.plaintext.val) {
+				else if(isChecked('plaintext')) {
 					r.push("* " + t.title + "\n\t" + t.url);
 				}
-				else if(options.custom.val) {
+				else if(isChecked('custom')) {
 					r.push(options.txtCustom.val.replace(/\{title\}/g, t.title).replace(/\{url\}/g, t.url));
 				}
 				else {
@@ -104,7 +107,7 @@
 			}
 		}
 
-		if (options.debugMode.val && !$('#debug')[0]) {
+		if (isChecked('debugMode') && !$('#debug')[0]) {
 			var e = document.createElement('pre');
 			e.id = 'debug';
 			$('#P')[0].parentNode.appendChild(e);
